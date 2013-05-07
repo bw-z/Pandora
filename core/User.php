@@ -78,33 +78,6 @@ class User {
 		return false;
 	}
 	
-	// generates a challenge login code
-	public function generateChallenge() {
-	
-	    $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	    $challenge = "";
-	    for ($i = 0; $i < 30; $i++) {
-	    	$challenge .= $characters[rand(0, strlen($characters) - 1)]; 	
-	    }
-	    
-	    $t = time();
-	    
-	    $query = $this->db->prepare("INSERT INTO challenges (userid, challenge, timestamp) VALUES(?, ?, ?)");
-		$query->bind_param('sss', $this->username, $challenge, $t);
-		$query->execute();
-		$query->close();
-		
-		return $challenge;
-    
-	}
-	
-	//verifies a challenge provided
-	public function verifyChallenge($verify) {
-		
-		
-		
-	}
-	
 	
 	
 }
