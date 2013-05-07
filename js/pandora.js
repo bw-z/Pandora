@@ -67,7 +67,7 @@ function userLogin(username, password, key_bit_length) {
 		// generate salt to hash the password with and seed the private key
 		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 		for (var i = 0; i < 30; i++) salt_clear += possible.charAt(Math.floor(Math.random() * possible.length));
-		salt_enc = cryptico.encrypt(salt_clear, public_clear).cipher;
+		
 		
 		//Generate the Public & Private Keys
 		var PassPhrase = salt_clear;
@@ -79,6 +79,8 @@ function userLogin(username, password, key_bit_length) {
 		// encryt the private key before sending it to the server
 		private_enc = sjcl.encrypt(password_clear, private_clear);
 		
+		// encryt the salt before sending it to the server
+		salt_enc = cryptico.encrypt(salt_clear, public_clear).cipher;
 		
 		// hash the password (SHA512)
 		var shaObj = new jsSHA(password_clear + salt_clear, "ASCII");
@@ -95,6 +97,8 @@ function userLogin(username, password, key_bit_length) {
 												"&salt_enc=" + encodeURIComponent(salt_enc), false);
 		xhReq.send(null);
 		var serverResponse = xhReq.responseText;
+		
+		alert("Your account has been created, please enter your details again to login.");
 	
 	// an account does exist so try to login
 	} else {
