@@ -1,0 +1,11 @@
+<?php
+
+// logout the user by deleting session keys
+session_start();
+$_SESSION['auth_pandora'] = 0;
+$_SESSION['user'] = "";
+
+// show the user the home screen
+header("Location: ../home/");
+
+?>
