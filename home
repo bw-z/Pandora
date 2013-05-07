@@ -1,0 +1,32 @@
+<?php
+
+	include('config.php');
+	
+	include_once('core/User.php');
+	include_once('core/Password.php');
+	
+	//Load session
+	session_start();
+	
+	// Check to see if the user is authenticated
+	if (!isset($_SESSION['auth_pandora']) || !($_SESSION['auth_pandora'])) {
+		// if not show login screen
+		include('html/login.php');
+		die();
+	}
+	
+	// load the current user object
+	$currentUser = $_SESSION['user'];
+	
+	
+	//get current users password list
+	$p = new Password($currentUser, $db);
+	$plist = $p->getPasswordList();
+   
+	// show the homepage html
+	include('html/home.php');
+		
+
+?>
+
+
