@@ -14,25 +14,25 @@
 </script>
     <script src="../assets/js/bootstrap.js" type="text/javascript">
 </script>
-    <script language="JavaScript" type="text/javascript" src="../js_crypo/jsbn.js">
+    <script language="JavaScript" type="text/javascript" src="../js_crypto/jsbn.js">
 </script>
-    <script language="JavaScript" type="text/javascript" src="../js_crypo/random.js">
+    <script language="JavaScript" type="text/javascript" src="../js_crypto/random.js">
 </script>
-    <script language="JavaScript" type="text/javascript" src="../js_crypo/hash.js">
+    <script language="JavaScript" type="text/javascript" src="../js_crypto/hash.js">
 </script>
-    <script language="JavaScript" type="text/javascript" src="../js_crypo/rsa.js">
+    <script language="JavaScript" type="text/javascript" src="../js_crypto/rsa.js">
 </script>
-    <script language="JavaScript" type="text/javascript" src="../js_crypo/aes.js">
+    <script language="JavaScript" type="text/javascript" src="../js_crypto/aes.js">
 </script>
-    <script language="JavaScript" type="text/javascript" src="../js_crypo/api.js">
+    <script language="JavaScript" type="text/javascript" src="../js_crypto/api.js">
 </script>
-    <script language="JavaScript" type="text/javascript" src="../js_crypo/sjcl.js">
+    <script language="JavaScript" type="text/javascript" src="../js_crypto/sjcl.js">
 </script>
-    <script language="JavaScript" type="text/javascript" src="../js_crypo/jsSHA/sha.js">
+    <script language="JavaScript" type="text/javascript" src="../js_crypto/jsSHA/sha.js">
 </script>
-    <script language="JavaScript" type="text/javascript" src="../js_crypo/jquery.session.js">
+    <script language="JavaScript" type="text/javascript" src="../js_crypto/jquery.session.js">
 </script>
-    <script language="JavaScript" type="text/javascript" src="../js_crypo/jsSHA/sha512.js">
+    <script language="JavaScript" type="text/javascript" src="../js_crypto/jsSHA/sha512.js">
 </script>
     <script language="JavaScript" type="text/javascript" src="../js/pandora.js">
 </script>
