@@ -1,7 +1,7 @@
 <?php
 	
 	// interface to create a new user in the DB
-	include('../connect.php');
+	include('../config.php');
 	include('../core/User.php');
 	
 	session_start();
