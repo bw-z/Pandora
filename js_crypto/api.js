@@ -274,6 +274,12 @@ var cryptico = (function() {
         return pubkey; 
     }
     
+    // Returns the ascii-armored version of the private key.
+    my.privateKeyString = function(rsakey) 
+    {
+        return my.b16to64(rsakey.d.toString(16)); 
+    }
+    
     // Returns an MD5 sum of a publicKeyString for easier identification.
     my.publicKeyID = function(publicKeyString)
     {
@@ -288,6 +294,18 @@ var cryptico = (function() {
         rsa.setPublic(N, E);
         return rsa
     }
+    
+    my.privateKeyFromString = function(n, d)
+    {
+        var N = my.b64to16(n.split("|")[0]);
+        var E = "03";
+        var D = my.b64to16(d.split("|")[0]);
+        var rsa = new RSAKey();
+        rsa.setPrivate(N, E, D);
+        return rsa
+    }
+    
+     //(N, E, D)
     
     my.encrypt = function(plaintext, publickeystring, signingkey)
     {

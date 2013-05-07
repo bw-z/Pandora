@@ -99,6 +99,18 @@ function RSASetPublic(N, E)
     else alert("Invalid RSA public key");
 }
 
+// Used to create a new key from Private and Public Parts
+function RSASetPrivate(N, E, D)
+{
+    if (N != null && E != null && N.length > 0 && E.length > 0)
+    {
+        this.n = parseBigInt(N, 16);
+        this.e = parseInt(E, 16);
+        this.d = parseBigInt(D, 16);
+    }
+    else alert("Invalid RSA private key");
+}
+
 // Perform raw public operation on "x": return x^e (mod n)
 
 
@@ -132,7 +144,7 @@ RSAKey.prototype.doPublic = RSADoPublic;
 // public
 RSAKey.prototype.setPublic = RSASetPublic;
 RSAKey.prototype.encrypt = RSAEncrypt;
-
+RSAKey.prototype.setPrivate = RSASetPrivate;
 // Version 1.1: support utf-8 decoding in pkcs1unpad2
 // Undo PKCS#1 (type 2, random) padding and, if valid, return the plaintext
 
