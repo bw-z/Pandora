@@ -1,0 +1,9 @@
+<FilesMatch "^home$">
+    ForceType application/x-httpd-php
+</FilesMatch>
+<FilesMatch "new$">
+    ForceType application/x-httpd-php
+</FilesMatch>
+<FilesMatch "logout$">
+    ForceType application/x-httpd-php
+</FilesMatch>
