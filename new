@@ -1,6 +1,6 @@
 <?php
 
-	include('connect.php');
+	include('config.php');
 	
 	include_once('core/User.php');
 	include_once('core/Password.php');
