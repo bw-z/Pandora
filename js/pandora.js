@@ -44,13 +44,38 @@ function de(enc) {
 	return cryptico.decrypt(enc, RSAkey).plaintext;
 }
 
-// Function for the user login page. Allows creation of a new user account 
-// or allows a user to log in
-function userLogin(username, password, key_bit_length) {
+
+
+// Function to create a new account where authentication is being handled locally
+function userCreateLocal() {
+	// grab all the form inputs
+	var username = document.getElementById('user').value;
+	var password = document.getElementById('password').value;
+	var cpassword = document.getElementById('confirm').value;
+	var firstname = document.getElementById('first').value;
+	var lastname = document.getElementById('last').value;
+	var email = document.getElementById('email').value;
+	
+	//validate password
+	if (password != cpassword) {
+		alert("passwords do not match");
+		return false;
+	}
+	
+	if (userCreate(username, password, firstname, lastname, email)) {
+		window.location = "../home/?new=1";
+	} else {
+		alert("The username provided already exists, please try again");
+	}
+	
+}
+
+function userCreate(username, password, firstname, lastname, email) {
+
 	// get user info from the server
 	var d = getUserInfo(username);
 	// if generating a new key use this bit length
-	key_bit_length = key_bit_length || 1024;
+	key_bit_length = 1024;
 	
 	// If this is a new user, create a new account
 	if (!d.exists) {
@@ -91,15 +116,41 @@ function userLogin(username, password, key_bit_length) {
 		// sends the server the public key, and encrypted private key, salt and hash 
 		var xhReq = new XMLHttpRequest();
 		xhReq.open("GET", "../post/user_create.php?user=" + encodeURIComponent(username) + 
+												"&firstname=" + encodeURIComponent(firstname) + 
+												"&lastname=" + encodeURIComponent(lastname) + 
+												"&email=" + encodeURIComponent(email) + 
 												"&password_hash_enc=" + encodeURIComponent(password_hash_enc) + 
 												"&private_enc=" + encodeURIComponent(private_enc) + 
 												"&public_clear=" + encodeURIComponent(public_clear) + 
 												"&salt_enc=" + encodeURIComponent(salt_enc), false);
 		xhReq.send(null);
 		var serverResponse = xhReq.responseText;
-		
-		alert("Your account has been created, please enter your details again to login.");
+		//redirect the user
+		//alert("Your account has been created, please enter your details again to login.");
+			return true;
+		// an account does exist so show error message
+		} else {
+			return false;
+			//alert("A user already exists for this username.");
+		}
+}
+
+
+// Function for the user login page
+function userLoginLocal() {
+	var username = document.getElementById('user').value;
+	var password = document.getElementById('password').value;
+	userLogin(username, password);
+}
+
+
+function userLogin(username, password, key_bit_length) {
+	// get user info from the server
+	var d = getUserInfo(username);
 	
+	// If this is a new user, create a new account
+	if (!d.exists) {
+		window.location = "../home/?bad=1";
 	// an account does exist so try to login
 	} else {
 		var password_clear = password;

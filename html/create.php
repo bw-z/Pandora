@@ -38,28 +38,24 @@ body {
 
 <body>
     <div class="container">
-    
-	    <?php if (isset($_REQUEST['bad'])) { ?>
-	
-	        <div class="alert alert-error">
-	            Invalid Username and Password combination
-	        </div>
-	     <?php }  if (isset($_REQUEST['new'])) { ?>
-	
-	        <div class="alert alert-success">
-	            Account created please enter your details again to login
-	        </div>
-		<?php } ?>
 
         <form class="form-signin" method="post">
-            <h2 class="form-signin-heading" style="font-size: 16px;">Please login</h2>
+            <h2 class="form-signin-heading" style="font-size: 16px;">Create a new account</h2>
             
             <input type="text" class="input-block-level" placeholder="username" name="user" id="user"> 
             
             <input type="password" class="input-block-level" placeholder="password" name="password" id="password"> 
             
+            <input type="password" class="input-block-level" placeholder="confirm password" name="confirm" id="confirm"> 
+            
+            <input type="text" class="input-block-level" placeholder="first name" name="first" id="first"> 
+            
+            <input type="text" class="input-block-level" placeholder="last name" name="last" id="last"> 
+            
+            <input type="text" class="input-block-level" placeholder="email address" name="email" id="email"> 
+            
             <input type="button" class="btn btn-large btn-primary" 
-            onclick="userLoginLocal()" value="Login">  <p class="pull-right" style="margin-top:15px;"><a href="../create/">... or create a new account</a></p>
+            onclick="userCreateLocal()" value="Create Account">
         </form>
     </div><!-- /container -->
 </body>

@@ -1,0 +1,25 @@
+<?php
+
+	include('config.php');
+	
+	include_once('core/User.php');
+	include_once('core/Password.php');
+	
+	//Load session
+	session_start();
+	
+	// Check to see if the user is authenticated
+	if (!isset($_SESSION['auth_pandora']) || !($_SESSION['auth_pandora'])) {
+		// if not show login screen
+		include('html/create.php');
+		die();
+	}
+	
+	// if the user is logged in already redirect them
+	header("Location: ../home/");
+	
+		
+
+?>
+
+
