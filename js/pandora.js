@@ -90,9 +90,7 @@ function userCreate(username, password, firstname, lastname, email) {
 		var salt_enc = "";
 		
 		// generate salt to hash the password with and seed the private key
-		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-		for (var i = 0; i < 30; i++) salt_clear += possible.charAt(Math.floor(Math.random() * possible.length));
-		
+		salt_clear = getSalt();
 		
 		//Generate the Public & Private Keys
 		var PassPhrase = salt_clear;
@@ -133,6 +131,14 @@ function userCreate(username, password, firstname, lastname, email) {
 			return false;
 			//alert("A user already exists for this username.");
 		}
+}
+
+//
+function getSalt() {
+	var salt_clear = "";
+	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	for (var i = 0; i < 30; i++) salt_clear += possible.charAt(Math.floor(Math.random() * possible.length));
+	return salt_clear;
 }
 
 
