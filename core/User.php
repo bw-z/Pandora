@@ -24,6 +24,11 @@ class User {
 	public $password_hash_enc;
 	// The users salt is stored encrypted with the users public key.
 	public $salt_enc;
+	
+	//personal details of this user
+	public $firstname;
+	public $lastname;
+	public $email;
 
 	// COnstructor class
 	public function __construct($db) {
@@ -33,8 +38,9 @@ class User {
 	// Save a new users details into the database
 	public function saveUser() {
 
-		$query = $this->db->prepare("INSERT INTO users (username, password_hash, privatekey_enc, publickey, salt) VALUES(?, ?, ?, ?, ?)");
-		$query->bind_param('sssss', $this->username, $this->password_hash_enc, $this->privatekey_enc, $this->publickey_clear, $this->salt_enc);
+		$query = $this->db->prepare("INSERT INTO users (username, password_hash, privatekey_enc, publickey, salt, firstname, lastname, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+		$query->bind_param('ssssssss', $this->username, $this->password_hash_enc, $this->privatekey_enc, $this->publickey_clear, 
+										$this->salt_enc, $this->firstname, $this->lastname, $this->email);
 		$query->execute();
 		$this->userid = $query->insert_id;
 		$query->close();
@@ -43,11 +49,11 @@ class User {
 	// load a given users details
 	public function loadUser($username) {
 
-		$query = $this->db->prepare("SELECT uid, username, password_hash, privatekey_enc, publickey, salt FROM users WHERE username = ?");
+		$query = $this->db->prepare("SELECT uid, username, password_hash, privatekey_enc, publickey, salt, firstname, lastname, email FROM users WHERE username = ?");
 		$query->bind_param('s', $username);
 		$query->execute();
 
-		$query->bind_result($a, $b, $c, $d, $e, $f);
+		$query->bind_result($a, $b, $c, $d, $e, $f, $g, $h, $i);
 
 		while ($query->fetch()) {
 			$this->userid = $a;
@@ -56,6 +62,10 @@ class User {
 			$this->password_hash_enc = $c;
 			$this->publickey_clear = $e;
 			$this->salt_enc = $f;
+			
+			$this->firstname = $g;
+			$this->lastname = $h;
+			$this->email = $i;
 		}
 		$query->close();
 	}

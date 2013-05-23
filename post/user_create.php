@@ -12,6 +12,10 @@
 	$public_clear = $_REQUEST['public_clear'];
 	$salt_enc = $_REQUEST['salt_enc'];
 	
+	$firstname = $_REQUEST['firstname'];
+	$lastname = $_REQUEST['lastname'];
+	$email = $_REQUEST['email'];
+	
 	$u = new User($db);
 	
 	if (!$u->userExists($user)) {
@@ -20,6 +24,10 @@
 		$u->privatekey_enc = $private_enc;
 		$u->publickey_clear = $public_clear;
 		$u->salt_enc = $salt_enc;
+		
+		$u->firstname = $firstname;
+		$u->lastname = $lastname;
+		$u->email = $email;
 		
 		$u->saveUser();		
 	}
