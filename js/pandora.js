@@ -89,8 +89,12 @@ function userCreate(username, password, firstname, lastname, email) {
 		var salt_clear = "";
 		var salt_enc = "";
 		
+		var challenge_clear = "";
+		var challenge_hash = "";
+		
 		// generate salt to hash the password with and seed the private key
 		salt_clear = getSalt();
+		challenge_clear = getSalt();
 		
 		//Generate the Public & Private Keys
 		var PassPhrase = salt_clear;
@@ -110,6 +114,10 @@ function userCreate(username, password, firstname, lastname, email) {
 		var password_hash = shaObj.getHash("SHA-512", "HEX");
 		password_hash_enc = cryptico.encrypt(password_hash, public_clear).cipher;
 		
+		//hash the challenge string
+		var shaObj = new jsSHA(password_clear + challenge_clear, "ASCII");
+		challenge_hash = shaObj.getHash("SHA-512", "HEX");
+		
 		// create the user on the server
 		// sends the server the public key, and encrypted private key, salt and hash 
 		var xhReq = new XMLHttpRequest();
@@ -120,7 +128,10 @@ function userCreate(username, password, firstname, lastname, email) {
 												"&password_hash_enc=" + encodeURIComponent(password_hash_enc) + 
 												"&private_enc=" + encodeURIComponent(private_enc) + 
 												"&public_clear=" + encodeURIComponent(public_clear) + 
+												"&challenge_clear=" + encodeURIComponent(challenge_clear) + 
+												"&challenge_hash=" + encodeURIComponent(challenge_hash) + 
 												"&salt_enc=" + encodeURIComponent(salt_enc), false);
+												
 		xhReq.send(null);
 		var serverResponse = xhReq.responseText;
 		//redirect the user
@@ -191,16 +202,23 @@ function userLogin(username, password, key_bit_length) {
 				$.session.set('private_clear', private_clear);
 				$.session.set('public_clear', public_clear);
 				$.session.set('userid', d.userid);
+				
+				//hash the challenge string
+				var shaObj = new jsSHA(password_clear + d.challenge, "ASCII");
+				challenge_hash = shaObj.getHash("SHA-512", "HEX");
+		
 				// tell the server we have logged on as this user
-				// TODO while this could be forged if it is the missing private key would make accessing data impossible
-				//      but there should be some challenge question to verify TODO
 				var xhReqB = new XMLHttpRequest();
-				xhReqB.open("GET", "../post/login.php?user=" + username + "&challenge_resp=a", false);
+				xhReqB.open("GET", "../post/login.php?user=" + username + "&challenge_resp=" + challenge_hash, false);
 				xhReqB.send(null);
 				var serverResponse = xhReqB.responseText;
 				
-				// show the user the home screen
-				window.location = "../home/";
+				if (jQuery.parseJSON(serverResponse).login == "1") {
+					// show the user the home screen
+					window.location = "../home/";
+				} else {
+					window.location = "../home/?bad=1";
+				}
 			} else {
 				window.location = "../home/?bad=1";
 			}

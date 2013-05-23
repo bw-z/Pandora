@@ -26,6 +26,8 @@
 	$public_clear = "";
 	// the DB userid
 	$userid = "";
+	//
+	$challenge_clear = "";
 		
 	// Load the users details fro the DB
 	$u = new User($db);
@@ -41,6 +43,8 @@
 		$public_clear = $u->publickey_clear;
 		$userd = $u->userid;
 		
+		$challenge_clear = $u->challenge_clear;
+		
 	}
 	
 	// pas these details back to the client
@@ -49,7 +53,8 @@
 					"hash_enc" => $password_hash_enc,
 					"private_enc" => $private_enc,
 					"public_clear" => $public_clear,
-					"userid" => $userid
+					"userid" => $userid,
+					"challenge" => $challenge_clear
 					);
 		
 	echo json_encode($result);

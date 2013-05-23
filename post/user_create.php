@@ -16,6 +16,9 @@
 	$lastname = $_REQUEST['lastname'];
 	$email = $_REQUEST['email'];
 	
+	$challenge_clear = $_REQUEST['challenge_clear'];
+	$challenge_hash = $_REQUEST['challenge_hash'];
+	
 	$u = new User($db);
 	
 	if (!$u->userExists($user)) {
@@ -24,6 +27,9 @@
 		$u->privatekey_enc = $private_enc;
 		$u->publickey_clear = $public_clear;
 		$u->salt_enc = $salt_enc;
+		
+		$u->challenge_clear = $challenge_clear;
+		$u->challenge_hash = $challenge_hash;
 		
 		$u->firstname = $firstname;
 		$u->lastname = $lastname;

@@ -25,6 +25,10 @@ class User {
 	// The users salt is stored encrypted with the users public key.
 	public $salt_enc;
 	
+	//the challenge code used to verify a user knows their password when logging in
+	public $challenge_clear;
+	public $challenge_hash;
+	
 	//personal details of this user
 	public $firstname;
 	public $lastname;
@@ -38,9 +42,10 @@ class User {
 	// Save a new users details into the database
 	public function saveUser() {
 
-		$query = $this->db->prepare("INSERT INTO users (username, password_hash, privatekey_enc, publickey, salt, firstname, lastname, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-		$query->bind_param('ssssssss', $this->username, $this->password_hash_enc, $this->privatekey_enc, $this->publickey_clear, 
-										$this->salt_enc, $this->firstname, $this->lastname, $this->email);
+		$query = $this->db->prepare("INSERT INTO users (username, password_hash, privatekey_enc, publickey, salt, firstname, lastname, email, challenge, challenge_hash) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		$query->bind_param('ssssssssss', $this->username, $this->password_hash_enc, $this->privatekey_enc, $this->publickey_clear, 
+										$this->salt_enc, $this->firstname, $this->lastname, $this->email, 
+										$this->challenge_clear, $this->challenge_hash);
 		$query->execute();
 		$this->userid = $query->insert_id;
 		$query->close();
@@ -49,11 +54,11 @@ class User {
 	// load a given users details
 	public function loadUser($username) {
 
-		$query = $this->db->prepare("SELECT uid, username, password_hash, privatekey_enc, publickey, salt, firstname, lastname, email FROM users WHERE username = ?");
+		$query = $this->db->prepare("SELECT uid, username, password_hash, privatekey_enc, publickey, salt, firstname, lastname, email, challenge, challenge_hash FROM users WHERE username = ?");
 		$query->bind_param('s', $username);
 		$query->execute();
 
-		$query->bind_result($a, $b, $c, $d, $e, $f, $g, $h, $i);
+		$query->bind_result($a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k);
 
 		while ($query->fetch()) {
 			$this->userid = $a;
@@ -66,6 +71,9 @@ class User {
 			$this->firstname = $g;
 			$this->lastname = $h;
 			$this->email = $i;
+			
+			$this->challenge_clear = $j;
+			$this->challenge_hash = $k;
 		}
 		$query->close();
 	}
