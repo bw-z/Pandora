@@ -14,6 +14,14 @@
     <?php include("_menu.php"); ?>
 
     <div class="container">
+    
+    	<?php if (isset($_REQUEST['error'])) { ?>
+	        <div class="alert alert-error">
+	            An unexpected error has occurred... please try again or contact an administrator.
+	        </div>
+	     <?php } ?>
+	     
+	     
         <h2>My Passwords</h2>
 
         <div class="row">
