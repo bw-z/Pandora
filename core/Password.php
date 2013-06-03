@@ -24,7 +24,8 @@ class Password {
 	//constructor class
 	public function __construct($u, $db) {
 		$this->db = $db;
-		$this->user = $u;
+		//user id of the user saving or receiving password
+		$this->userid = $u;
 
 	}
 
@@ -40,7 +41,7 @@ class Password {
 		$t = time();
 
 		$query = $this->db->prepare("INSERT INTO password (user_id, title_enc, username_enc, password_enc, notes_enc, url_enc, timestamp, groupid) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-		$uid = $this->user->userid;
+		$uid = $this->userid;
 		$query->bind_param('ssssssss', $uid, $this->title_enc, $this->username_enc, $this->password_enc, $this->notes_enc, $this->url_enc, $t, $this->groupid);
 		$query->execute();
 		$this->id = $query->insert_id;
@@ -51,7 +52,7 @@ class Password {
 	// get a list of encrypted password details for the user provided
 	public function getPasswordList() {
 		$query = $this->db->prepare("SELECT passwordid, title_enc, username_enc, password_enc, notes_enc, url_enc, timestamp, group_id FROM password WHERE user_id = ?");
-		$uid = $this->user->userid;
+		$uid = $this->userid;
 		$query->bind_param('s', $uid);
 		$query->execute();
 

@@ -20,7 +20,7 @@
 	
 	
 	//get current users password list
-	$p = new Password($currentUser, $db);
+	$p = new Password($currentUser->userid, $db);
 	$plist = $p->getPasswordList();
    
 	// show the homepage html
