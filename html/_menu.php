@@ -8,7 +8,7 @@
                         <li class="active"><a href="../home/">Home</a></li>
 
                         <li><a href="../new/">New Password</a></li>
-
+						<li><a href="../team/">New Team</a></li>
                         
                     </ul>
 

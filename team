@@ -1,0 +1,44 @@
+<?php
+
+	include('config.php');
+	
+	include_once('core/User.php');
+	include_once('core/Team.php');
+	
+	session_start();
+	
+	//check that the user is logged in
+	if (!isset($_SESSION['auth_pandora']) || !($_SESSION['auth_pandora'])) {
+		include('html/login.php');
+		die();
+	}
+	
+	$currentUser = $_SESSION['user'];
+	
+	// used to check if this is a new group or managing an existing team/group 
+	$showteam = 0;
+	
+	// check for the team id for editing existing teams
+	$expl = explode("/",$_SERVER["REQUEST_URI"]);
+    $tid = $expl[count($expl)-1];
+    
+    // if a teamid has been provided
+    if (is_numeric($tid)) {
+    	//load details of team and team class
+	    $t = new Team($currentUser, $db, $tid);
+	    // check that the current user is an administrator of this team
+	    if ($t->getAdmin() == $currentUser->userid) {
+		    $showteam = 1;
+		    $members = $t->getUsers();
+	    } else {
+		    //show error message
+		    header("Location: ../home/?error=1");
+	    } 
+    } 
+
+	include('html/team.php');
+	
+
+?>
+
+
