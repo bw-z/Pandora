@@ -32,8 +32,8 @@ All rights reserved.
 #### crypto-js for symentric encryption
 - https://code.google.com/p/crypto-js/source/browse/branches/3.x/src/sha512.js?r=491 
 
-#### j-query session plugin
-- https://github.com/AlexChittock/JQuery-Session-Plugin/blob/master/jquery.session.js
+#### jStorage HTML5 datastore plugin
+- http://www.jstorage.info/
 
 
 Redistribution and use in source and binary forms, with or without
