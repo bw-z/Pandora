@@ -14,7 +14,7 @@
 	$user_receiving = $_SESSION['user'];
 	$user_id = $user_receiving->userid;
 	
-	if (isset($_REQUEST['userid_send']) {
+	if (isset($_REQUEST['userid_send'])) {
 		$user_id = $_REQUEST['userid_send'];
 	}
 

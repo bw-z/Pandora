@@ -40,7 +40,7 @@ class Password {
 
 		$t = time();
 
-		$query = $this->db->prepare("INSERT INTO password (user_id, title_enc, username_enc, password_enc, notes_enc, url_enc, timestamp, groupid) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+		$query = $this->db->prepare("INSERT INTO password (user_id, title_enc, username_enc, password_enc, notes_enc, url_enc, timestamp, group_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
 		$uid = $this->userid;
 		$query->bind_param('ssssssss', $uid, $this->title_enc, $this->username_enc, $this->password_enc, $this->notes_enc, $this->url_enc, $t, $this->groupid);
 		$query->execute();
