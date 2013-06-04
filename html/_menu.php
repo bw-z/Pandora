@@ -5,8 +5,7 @@
 
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li class="active"><a href="../home/">Home</a></li>
-
+                        <li><a href="../home/">Home</a></li>
                         <li><a href="../new/">New Password</a></li>
 						<li><a href="../team/">New Team</a></li>
                         
