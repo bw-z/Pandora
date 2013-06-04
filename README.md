@@ -16,11 +16,12 @@ All rights reserved.
 - User Account Creation
 - JavaScript Public Key Encryption for Password Storage
 - Password Storage
+- Password Sharing (Group based)
 
 #### Coming Soon
 - JavaScript ldap integration 
-- Password Management 
-- Password Sharing (Group based)
+- Password Management (Edit / Delete Passwords etc)
+
 
 
 ### Includes Content From;
