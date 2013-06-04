@@ -4,6 +4,7 @@
 	
 	include_once('core/User.php');
 	include_once('core/Team.php');
+	include_once('core/Password.php');
 	
 	session_start();
 	
