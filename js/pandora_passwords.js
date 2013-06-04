@@ -26,7 +26,7 @@ function newPassword() {
 	newPasswordPost($.jStorage.get("userid"), title_enc.cipher, url_enc.cipher, username_enc.cipher, password_enc.cipher, notes_enc.cipher, suid, group_id);
 	
 	// Redirect the user back to the homepage
-	window.location = "../home/"
+	//window.location = "../home/"
 	return false;
 }
 
@@ -37,8 +37,21 @@ function de(enc) {
 }
 
 //Saves a new password to the server (after encrypting it) for a shared password to another user
-function newPasswordSend(userid, password) {
-	//TODO
+function newPasswordSend(other_userid, other_username, title, url, username, password, notes, suid, group_id) {
+	//fetch the other users public keys
+	var d = getUserInfo(other_username);
+	var public_clear = d.public_clear;
+	
+	// Encrypt all the feilds with the other users public key
+	var title_enc = cryptico.encrypt(title, public_clear);
+	var url_enc = cryptico.encrypt(url, public_clear);
+	var username_enc = cryptico.encrypt(username, public_clear);
+	var password_enc = cryptico.encrypt(password, public_clear);
+	var notes_enc = cryptico.encrypt(notes, public_clear);
+	
+	// Send a HTTP Request to the server
+	newPasswordPost(other_userid, title_enc.cipher, url_enc.cipher, username_enc.cipher, password_enc.cipher, notes_enc.cipher, suid, group_id);
+	
 }
 
 // performs the post function pushing password to server

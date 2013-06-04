@@ -51,39 +51,74 @@ class Password {
 
 		$query->close();
 	}
-
-	// get a list of encrypted password details for the user provided
-	public function getPasswordList() {
-		$query = $this->db->prepare("SELECT passwordid, title_enc, username_enc, password_enc, notes_enc, url_enc, timestamp, group_id, suid FROM password WHERE user_id = ?");
+	
+	// get a list of encrypted password details for passwords the user has access to (or are stored)
+	public function getTeamPasswordList() {
+		
+		// first extract the teams this user is a member of
+		$team_list = array();
+		array_push($team_list, array("groupid" => "0", "groupname" => "My Passwords (Not Shared)", "groupadmin" => "-1", "password_list" => array()));
+		
+		$query = $this->db->prepare("SELECT groupmembers.groupid, groupname, groupadmin FROM groups, groupmembers WHERE groups.groupid = groupmembers.groupid AND userid = ?");
 		$uid = $this->userid;
 		$query->bind_param('s', $uid);
 		$query->execute();
 
-		$query->bind_result($a, $b, $c, $d, $e, $f, $g, $h, $i);
-		$password_list = array();
+		$query->bind_result($a, $b, $c);
 
 		while ($query->fetch()) {
-			$this->id = $a;
-			$this->timestamp = $g;
-			$this->title_enc = $b;
-			$this->username_enc = $c;
-			$this->password_enc = $d;
-			$this->notes_enc = $e;
-			$this->url_enc = $f;
-			$this->groupid = $h;
-			
-			$this->suid = $i;
-
-			$p = array("id"=>$this->id, "title"=>$this->title_enc, "username"=>$this->username_enc, "password"=>$this->password_enc,
-				"notes"=>$this->notes_enc, "url"=>$this->url_enc, "timestamp"=>$this->timestamp, "suid" => $this->suid);
-			array_push($password_list, $p);
-
+			$t = array("groupid" => $a, "groupname" => $b, "groupadmin" => $c, "password_list" => array());
+			array_push($team_list, $t);
 		}
-
 		$query->close();
-		return $password_list;
-
+		
+		// query for all passwords in each team
+		$z = 0;
+		while ($z < sizeof($team_list)) {
+		
+			$queryB = $this->db->prepare("SELECT passwordid, title_enc, username_enc, password_enc, notes_enc, url_enc, timestamp, suid FROM password WHERE user_id = ? AND group_id = ?");
+			$uid = $this->userid;
+			$queryB->bind_param('ss', $uid, $team_list[$z]['groupid']);
+			$queryB->execute();
+	
+			$queryB->bind_result($d, $e, $f, $g, $h, $i, $j, $k);
+			$password_list = array();
+	
+			while ($queryB->fetch()) {
+				$p = array("id"=>$d, "title"=>$e, "username"=>$f, "password"=>$g, "notes"=>$h, "url"=>$i, "timestamp"=>$j, "suid" => $k);		
+				array_push($password_list, $p);
+			}
+			
+			// add the password list under each team
+			$team_list[$z]['password_list'] = $password_list;
+			$queryB->close();
+			
+			$z++;
+		
+		}
+		
+		return $team_list;
 	}
+	
+	//returns true if the SID is up to date
+	public function checkSID ($other_userid, $suid) {
+		// TODO add checking for timestamp etc
+		$query = $this->db->prepare("SELECT passwordid FROM password WHERE user_id = ? AND suid = ?");
+		$query->bind_param('ss', $other_userid, $suid);
+		$query->execute();
+
+		$query->bind_result($a);
+		
+		$r = false;
+		while ($query->fetch()) {
+			// password exists
+			$r = true;
+		}
+		$query->close();
+		return $r;
+	}
+
+	
 
 }
 

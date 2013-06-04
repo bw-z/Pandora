@@ -13,6 +13,9 @@
 	}
 
 	$currentUser = $_SESSION['user'];
+	
+	$p = new Password($currentUser->userid, $db);
+	$password_list = $p->getTeamPasswordList();
 
 
 	include('html/new.php');

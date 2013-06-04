@@ -38,6 +38,9 @@
 
 	include('html/team.php');
 	
+	// share passwords with other team members
+	include('html/share.php');
+	
 
 ?>
 

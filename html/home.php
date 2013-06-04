@@ -21,8 +21,6 @@
 	        </div>
 	     <?php } ?>
 	     
-	     
-        <h2>My Passwords</h2>
 
         <div class="row">
             <p></p>
@@ -60,107 +58,117 @@
                 </thead>
 
                 <tbody>
-                    <?php
-
-                              foreach($plist as $i) {
-                      
-                              ?>
-
+                    		
+                <?php foreach($password_list as $team) { ?>   
+                    
                     <tr>
-                        <td>
-                            <script type="text/javascript">
-	                            document.write(hsc(de("<?=$i['title']?>")));
-                            </script>
+                        <td colspan="8">	
+                    		<b><?=$team['groupname']?></b>
+                    		&nbsp;&nbsp; (<?= sizeof($team['password_list']) ?> Passwords)
+                    		<?php if ($team['groupadmin'] == $currentUser->userid) { ?>&nbsp;&nbsp; 
+                    			<a href="../team/<?=$team['groupid']?>">Edit this Team</a>
+                    		<?php } ?>
                         </td>
-
-                        <td>
-                            <script type="text/javascript">
-	                            document.write(hsc(de("<?=$i['username']?>")));
-                            </script>
-                        </td>
-
-                        <td id="pass<?=$i['id']?>">
-                            <script type="text/javascript">
-	                            for (var j = 0; j < de("<?=$i['password']?>").length; j++) {
-	                            	document.write("*");
-	                            }
-                            </script>
-                        </td>
-
-                        <td>
-                            <!--
-            <a class="btn" href="#" id="popCopy<?=$i['id']?>" data-trigger="hover" data-html="true" rel="popover" data-placement="left" data-content="Copy Password to Clipboard" ><i class="icon-plus" ></i></a> 
-                <script>  
-                    $(function ()  
-                    { $("#popCopy<?=$i['id']?>").popover(); 
-                    });  
-                </script>
-            -->
-                            <!--
-                script>document.write('"' + hsc(de("<?=$i['password']?>")) + '"');</script>-->
-                            
-                            <a class="btn" href="#" id="popPass<?=$i['id']?>" data-trigger="hover" data-html="true" rel="popover" data-placement="left" data-content="" onclick="showPass<?=$i['id']?>()"><i class="icon-eye-open" ></i></a> 
-                            <script type="text/javascript">
-		                        //Function for popup text
-	                            $(function ()  
-	                            { $("#popPass<?=$i['id']?>").popover(); 
-	                            });
-	                            
-	                            //Hide the password by default
-	                            var show<?=$i['id']?> = 0
-	                            // reveil the password
-	                            function showPass<?=$i['id']?>() {
-		                            
-	                            if (show<?=$i['id']?> == 0) {
-	                                pass<?=$i['id']?>.innerText = hsc(de("<?=$i['password']?>"));
-	                                show<?=$i['id']?> = 1;
-	                            } else {
-	                            	// mask the password with *s
-	                                var mask = ""
-	                                for (var j = 0; j < de("<?=$i['password']?>").length; j++) {
-	                                    mask = mask + "*";
-	                                }
-	                                pass<?=$i['id']?>.innerText = mask;
-	                                show<?=$i['id']?> = 0;
-	                            }
-	
-	                                        
-	                            }
-
-                            </script>
-                        </td>
-
-                        <td>
-                            <script type="text/javascript">
-	                            document.write(hsc(de("<?=$i['notes']?>")));
-                            </script>
-                        </td>
-
-                        <td>
-                            <script type="text/javascript">
-	                            document.write(hsc(de("<?=$i['url']?>")));
-                            </script>
-                        </td>
-                        <!--
-			            <td><a class="btn" href="<?=$i['url']?>" target="_new" id="popGo<?=$i['id']?>" data-trigger="hover" data-html="true" rel="popover" data-placement="left" data-content="Go to URL" ><i class="icon-circle-arrow-right" ></i></a> 
-			                <script>  
-			                    $(function ()  
-			                    { $("#popGo<?=$i['id']?>").popover(); 
-			                    });  
-			                </script>
-			            </td>
-			            -->
-
-                        <td><?=htmlspecialchars(date("Y-m-d", $i['timestamp']))?>
-                        </td>
-
-                        <td>
-                            <div class="btn-group"></div>
-                        </td><!--
-			            <td><a class="btn" href="../view/<?=($i['id'])?>">View or Edit &raquo;</a></td>
-			            -->
                     </tr>
-                <?php } ?>
+                    		
+                    <?php foreach($team['password_list'] as $i) { ?>
+
+		                    <tr>
+		                        <td>
+		                            <script type="text/javascript">
+			                            document.write(hsc(de("<?=$i['title']?>")));
+		                            </script>
+		                        </td>
+		
+		                        <td>
+		                            <script type="text/javascript">
+			                            document.write(hsc(de("<?=$i['username']?>")));
+		                            </script>
+		                        </td>
+		
+		                        <td id="pass<?=$i['id']?>">
+		                            <script type="text/javascript">
+			                            for (var j = 0; j < de("<?=$i['password']?>").length; j++) {
+			                            	document.write("*");
+			                            }
+		                            </script>
+		                        </td>
+		
+		                        <td>
+		                            <!--
+		            <a class="btn" href="#" id="popCopy<?=$i['id']?>" data-trigger="hover" data-html="true" rel="popover" data-placement="left" data-content="Copy Password to Clipboard" ><i class="icon-plus" ></i></a> 
+		                <script>  
+		                    $(function ()  
+		                    { $("#popCopy<?=$i['id']?>").popover(); 
+		                    });  
+		                </script>
+		            -->
+		                            <!--
+		                script>document.write('"' + hsc(de("<?=$i['password']?>")) + '"');</script>-->
+		                            
+		                            <a class="btn" href="#" id="popPass<?=$i['id']?>" data-trigger="hover" data-html="true" rel="popover" data-placement="left" data-content="" onclick="showPass<?=$i['id']?>()"><i class="icon-eye-open" ></i></a> 
+		                            <script type="text/javascript">
+				                        //Function for popup text
+			                            $(function ()  
+			                            { $("#popPass<?=$i['id']?>").popover(); 
+			                            });
+			                            
+			                            //Hide the password by default
+			                            var show<?=$i['id']?> = 0
+			                            // reveil the password
+			                            function showPass<?=$i['id']?>() {
+				                            
+			                            if (show<?=$i['id']?> == 0) {
+			                                pass<?=$i['id']?>.innerText = hsc(de("<?=$i['password']?>"));
+			                                show<?=$i['id']?> = 1;
+			                            } else {
+			                            	// mask the password with *s
+			                                var mask = ""
+			                                for (var j = 0; j < de("<?=$i['password']?>").length; j++) {
+			                                    mask = mask + "*";
+			                                }
+			                                pass<?=$i['id']?>.innerText = mask;
+			                                show<?=$i['id']?> = 0;
+			                            }
+			
+			                                        
+			                            }
+		
+		                            </script>
+		                        </td>
+		
+		                        <td>
+		                            <script type="text/javascript">
+			                            document.write(hsc(de("<?=$i['notes']?>")));
+		                            </script>
+		                        </td>
+		
+		                        <td>
+		                            <script type="text/javascript">
+			                            document.write(hsc(de("<?=$i['url']?>")));
+		                            </script>
+		                        </td>
+		                        <!--
+					            <td><a class="btn" href="<?=$i['url']?>" target="_new" id="popGo<?=$i['id']?>" data-trigger="hover" data-html="true" rel="popover" data-placement="left" data-content="Go to URL" ><i class="icon-circle-arrow-right" ></i></a> 
+					                <script>  
+					                    $(function ()  
+					                    { $("#popGo<?=$i['id']?>").popover(); 
+					                    });  
+					                </script>
+					            </td>
+					            -->
+		
+		                        <td><?=htmlspecialchars(date("Y-m-d", $i['timestamp']))?>
+		                        </td>
+		
+		                        <td>
+		                            <div class="btn-group"></div>
+		                        </td><!--
+					            <td><a class="btn" href="../view/<?=($i['id'])?>">View or Edit &raquo;</a></td>
+					            -->
+		                    </tr>
+		                <?php } ?>
+				<?php } ?>
                 </tbody>
             </table>
         </div>

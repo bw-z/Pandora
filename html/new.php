@@ -56,7 +56,9 @@
 		    <label class="control-label" for="itype">Share with Team</label>
 		    <div class="controls">
 		      <select id="team_id">
-			  	<option value="0">My Password (Do not Share)</option>
+			  	<?php foreach($password_list as $team) { ?> 
+                	  <option value="<?=$team['groupid']?>"><?=$team['groupname']?></option>
+                <?php } ?>
 			  </select>	      
 		    </div>
 		  </div>
