@@ -10,6 +10,7 @@ function newPassword() {
 	var username = document.getElementById('username').value;
 	var password = document.getElementById('password').value;
 	var notes = document.getElementById('notes').value;
+	var group_id = document.getElementById('team_id').value;
 	
 	// Encrypt all the feilds with the current users public key
 	title_enc = cryptico.encrypt(title, $.jStorage.get("public_clear"));
@@ -22,7 +23,7 @@ function newPassword() {
 	var suid = getSalt();
 	
 	// Send a HTTP Request to the server
-	newPasswordPost($.jStorage.get("userid"), title_enc.cipher, url_enc.cipher, username_enc.cipher, password_enc.cipher, notes_enc.cipher, suid);
+	newPasswordPost($.jStorage.get("userid"), title_enc.cipher, url_enc.cipher, username_enc.cipher, password_enc.cipher, notes_enc.cipher, suid, group_id);
 	
 	// Redirect the user back to the homepage
 	window.location = "../home/"
@@ -41,7 +42,7 @@ function newPasswordSend(userid, password) {
 }
 
 // performs the post function pushing password to server
-function newPasswordPost(userid, title_enc, url_enc, username_enc, password_enc, notes_enc, suid) {
+function newPasswordPost(userid, title_enc, url_enc, username_enc, password_enc, notes_enc, suid, group_id) {
 	// Send a HTTP Request to the server
 	var xhReq = new XMLHttpRequest();
 	xhReq.open("GET", "../post/new.php?userid=" + encodeURIComponent(userid) + 
@@ -50,6 +51,7 @@ function newPasswordPost(userid, title_enc, url_enc, username_enc, password_enc,
 									"&username_enc=" + encodeURIComponent(username_enc) + 
 									"&password_enc=" + encodeURIComponent(password_enc) + 
 									"&notes_enc=" + encodeURIComponent(notes_enc) + 
+									"&group_id=" + encodeURIComponent(group_id) +
 									"&suid=" + encodeURIComponent(suid)
 									, false);
 	xhReq.send(null);

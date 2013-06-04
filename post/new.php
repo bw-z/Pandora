@@ -19,6 +19,6 @@
 	}
 
 	$p = new Password($user_id, $db);
-	$p->storePassword($_REQUEST['title_enc'], $_REQUEST['username_enc'], $_REQUEST['password_enc'], $_REQUEST['notes_enc'], $_REQUEST['url_enc'], 0, $_REQUEST['suid']);
+	$p->storePassword($_REQUEST['title_enc'], $_REQUEST['username_enc'], $_REQUEST['password_enc'], $_REQUEST['notes_enc'], $_REQUEST['url_enc'], $_REQUEST['group_id'], $_REQUEST['suid']);
     
 ?>

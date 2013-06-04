@@ -51,6 +51,15 @@
 		      <input class="span4" type="text" placeholder="" id="url">		      
 		    </div>
 		  </div>
+		  
+		  <div class="control-group">
+		    <label class="control-label" for="itype">Share with Team</label>
+		    <div class="controls">
+		      <select id="team_id">
+			  	<option value="0">My Password (Do not Share)</option>
+			  </select>	      
+		    </div>
+		  </div>
 
 		  </div>
 		  
