@@ -96,6 +96,27 @@ class User {
 		return false;
 	}
 	
+	public function search($q) {
+		
+		$q = $q . "%";
+		$query = $this->db->prepare("SELECT username, firstname, lastname FROM users WHERE username LIKE ? OR firstname LIKE ? OR lastname LIKE ?");
+		$query->bind_param('sss', $q, $q, $q);
+		$query->execute();
+
+		$query->bind_result($a, $b, $c);
+		
+		$results = array();
+
+		while ($query->fetch()) {
+			array_push($results, strtoupper($c) . ", " . ucfirst($b) . " (" . $a . ")");
+		}
+		$query->close();
+		
+		return $results;
+	}
+
+	
+	
 	
 	
 }

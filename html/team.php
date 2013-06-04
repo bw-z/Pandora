@@ -53,7 +53,23 @@
 		    			</li>
 		    	<? } ?>
 		    	</ul>
-		      <input class="span4"  type="text" placeholder="add team member" name="add_member">		      
+		      <input class="span4"  type="text" placeholder="add team member" name="add_member" id="add_member" data-provide="typeahead" autocomplete="off">
+		      <script type="text/javascript">
+			      $(document).ready(function() {
+				    $("#add_member").typeahead({
+				        minLength: 3,
+				        source: function(query, process) {
+				            $.post('../post/user_search.php', { q: query, limit: 8 }, function(data) {
+				                process(JSON.parse(data));
+				            });
+				        },
+				        updater: function(obj) { 
+				        	var username = obj.substring(obj.indexOf("(") + 1, obj.length - 1);
+				        	document.location = "../post/team.php?a=save&teamid=<?=$t->getID()?>&add_member=" + encodeURIComponent(username);
+				        }
+				    });
+				});
+		      </script>
 		    </div>
 		  </div>
 		  <? } ?>
