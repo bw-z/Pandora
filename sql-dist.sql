@@ -9,10 +9,9 @@
 --
 
 CREATE TABLE `groupmembers` (
-  `gmid` int(15) NOT NULL AUTO_INCREMENT,
   `groupid` int(15) NOT NULL,
   `userid` int(15) NOT NULL,
-  PRIMARY KEY (`gmid`)
+  PRIMARY KEY (`groupid`,`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
