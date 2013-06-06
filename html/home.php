@@ -145,7 +145,7 @@
 		
 		                        <td>
 		                            <script type="text/javascript">
-			                            document.write(hsc(de("<?=$i['url']?>")));
+			                            document.write("<a href=\"" + hsc(de("<?=$i['url']?>")) + "\" target=\"_blank\">" + hsc(de("<?=$i['url']?>")) + "</a>");
 		                            </script>
 		                        </td>
 		                        <!--
