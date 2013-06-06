@@ -11,7 +11,7 @@
     
     <link href="../assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    <script src="https://raw.github.com/andris9/jStorage/master/jstorage.js" type="text/javascript"></script>
+    <script src="../js_crypto/jstorage.js" type="text/javascript"></script>
     <script src="../assets/js/bootstrap.js" type="text/javascript">
 </script>
     <script language="JavaScript" type="text/javascript" src="../js_crypto/jsbn.js">
