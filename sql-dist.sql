@@ -12,7 +12,7 @@ CREATE TABLE `groupmembers` (
   `groupid` int(15) NOT NULL,
   `userid` int(15) NOT NULL,
   PRIMARY KEY (`groupid`,`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
