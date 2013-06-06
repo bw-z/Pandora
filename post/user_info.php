@@ -41,7 +41,7 @@
 		$password_hash_enc = $u->password_hash_enc;
 		$private_enc = $u->privatekey_enc;
 		$public_clear = $u->publickey_clear;
-		$userd = $u->userid;
+		$userid = $u->userid;
 		
 		$challenge_clear = $u->challenge_clear;
 		
