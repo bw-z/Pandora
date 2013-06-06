@@ -26,7 +26,7 @@ function newPassword() {
 	newPasswordPost($.jStorage.get("userid"), title_enc.cipher, url_enc.cipher, username_enc.cipher, password_enc.cipher, notes_enc.cipher, suid, group_id);
 	
 	// Redirect the user back to the homepage
-	//window.location = "../home/"
+	window.location = "../home/"
 	return false;
 }
 
