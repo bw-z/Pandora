@@ -18,12 +18,6 @@ All rights reserved.
 - Password Storage
 - Password Sharing (Group based)
 
-#### Coming Soon
-- JavaScript ldap integration 
-- Password Management (Edit / Delete Passwords etc)
-
-
-
 ### Includes Content From;
 
 #### Twitter Bootstrap
