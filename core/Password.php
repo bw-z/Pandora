@@ -117,6 +117,21 @@ class Password {
 		$query->close();
 		return $r;
 	}
+	
+	// deletes a password from the db
+	public function deletePassword($id, $userid) {
+		$this->id = $id;
+		$this->user = $userid;
+		
+		$t = time();
+
+		$query = $this->db->prepare("DELETE FROM password WHERE passwordid = ? AND user_id = ?");
+
+		$query->bind_param('ss', $this->id, $this->user);
+		$query->execute();
+
+		$query->close();
+	}
 
 	
 

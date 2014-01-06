@@ -50,7 +50,7 @@
                         <!--<td></td>-->
 
                         <td>
-                            <h4>Last Updated</h4>
+                            <h4>Created</h4>
                         </td>
 
                         <td></td>
@@ -159,6 +159,7 @@
 					            -->
 		
 		                        <td><?=htmlspecialchars(date("Y-m-d", $i['timestamp']))?>
+		                        		<a href="../post/delete.php?id=<?=$i['id']?>">Delete</a>
 		                        </td>
 		
 		                        <td>
