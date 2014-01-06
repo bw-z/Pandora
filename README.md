@@ -3,8 +3,8 @@ Pandora
 
 A tool allowing passwords to be stored and shared in a zero trust enviroment.
 - Demo: http://delonge.com.au/p
-- Author: @bw_z
-- Copyright (c) 2013, @bw_z
+- Author: @bw_z (b@delonge.com.au)
+- Copyright (c) @bw_z
 
 Project Status: ALPHA
 DO NOT USE FOR PRODUCTION PURPOSES - there are known bugs, missing features 
