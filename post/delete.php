@@ -18,6 +18,6 @@
 	$p = new Password($user_id, $db);
 	$p->deletePassword($_REQUEST['id'], $user_id);
 	
-	header("Location: ../home");
+	header("Location: ../home/");
     
 ?>
